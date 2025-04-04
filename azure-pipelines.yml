@@ -4,7 +4,7 @@ trigger:
       - main
 
 pool:
-  name: COMP367-Pstellak  # Your custom pool name
+  name: COMP367-Pstellak  # Your custom pool nam
 
 variables:
   packageName: 'StringExtensions'
