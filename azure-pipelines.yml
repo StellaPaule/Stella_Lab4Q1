@@ -4,14 +4,12 @@ trigger:
       - main
 
 pool:
-  name: COMP367-Pstellak
-  demands:
-    - agent.name -equals MyWindows
+  name: COMP367-Pstellak  # Your custom pool name
 
 variables:
   packageName: 'StringExtensions'
   version: '1.0.0'
-  feedName: 'MyNugetFeed'  # Make sure this exactly matches the name of your Azure Artifacts feed
+  feedName: 'MyNugetFeed'
 
 steps:
   - task: UseDotNet@2
@@ -42,4 +40,4 @@ steps:
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      publishVstsFeed: 'MyNugetFeed'  # <-- Use the actual feed name or its internal ID from Artifacts
+      publishVstsFeed: $(feedName)
