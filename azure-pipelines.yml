@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
   branches:
     include:
@@ -16,7 +11,7 @@ pool:
 variables:
   packageName: 'StringExtensions'
   version: '1.0.0'
-  feedName: 'YOUR-AZURE-ARTIFACTS-FEED-NAME'
+  feedName: 'MyNugetFeed'  # Make sure this exactly matches the name of your Azure Artifacts feed
 
 steps:
   - task: UseDotNet@2
@@ -46,6 +41,5 @@ steps:
   - task: NuGetCommand@2
     inputs:
       command: 'push'
-      publishFeedCredentials: '$(System.AccessToken)'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      nuGetFeed: '$(feedName)'
+      publishVstsFeed: 'MyNugetFeed'  # <-- Use the actual feed name or its internal ID from Artifacts
